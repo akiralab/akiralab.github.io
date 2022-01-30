@@ -3,6 +3,7 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
+ //  basePath: '/',
  reactStrictMode: true,
  //distDir: 'build',
  webpack: (config, {}) => {
@@ -22,7 +23,7 @@ module.exports = {
       to: 'static/chunks/pages',
      },
      {
-      from: './model',
+      from: './model/',
       to: 'static/chunks/pages',
      },
     ],

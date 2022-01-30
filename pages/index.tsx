@@ -1,9 +1,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
 
-const Home = () => {
+const Home: NextPage = () => {
  return (
   <div className={styles.container}>
    <Head>
@@ -19,26 +20,14 @@ const Home = () => {
      </Link>
     </h1>
     <div className={styles.grid}>
-     <a href="/models" className={styles.card}>
+     <Link href="/models/model-list" className={styles.card}>
       <h3>Try Models &rarr;</h3>
-      <p>Find in-depth information about Next.js features and API.</p>
-     </a>
+     </Link>
+     <p>Find in-depth information about Next.js features and API.</p>
     </div>
    </main>
-   <div className={styles.grid}>
-    <a href="/models" className={styles.card}>
-     <h3>Try Models &rarr;</h3>
-     <p>Find in-depth information about Next.js features and API.</p>
-    </a>
-   </div>
    <footer>
-    <a
-     href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-     target="_blank"
-     rel="noopener noreferrer"
-    >
-     Powered by <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
-    </a>
+    Powered by <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
    </footer>
   </div>
  );

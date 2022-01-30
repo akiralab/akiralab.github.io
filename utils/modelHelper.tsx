@@ -9,6 +9,7 @@ export async function runSqueezenetModel(
  //https://onnxruntime.ai/docs/api/js/interfaces/InferenceSession.SessionOptions.html#graphOptimizationLevel
  const session = await ort.InferenceSession.create(
   './_next/static/chunks/pages/squeezenet1_1.onnx',
+  //   '../model/squeezenet1_1.onnx',
   { executionProviders: ['webgl'], graphOptimizationLevel: 'all' }
  );
  console.log('Inference session created');
