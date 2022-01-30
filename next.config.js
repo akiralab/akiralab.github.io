@@ -3,7 +3,7 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
- basePath: '/page',
+ basePath: '/pages/index.tsx',
  reactStrictMode: true,
  //distDir: 'build',
  webpack: (config, {}) => {
