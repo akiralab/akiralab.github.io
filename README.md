@@ -1,5 +1,1 @@
-# akiralab.github.io
-
-# website
-
-https://akiralab.github.io/
+# try ml models
