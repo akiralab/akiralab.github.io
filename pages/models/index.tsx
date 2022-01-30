@@ -6,9 +6,11 @@ export default function Models() {
  return (
   //   <>
   <div className={styles.grid}>
-   <Link href="/models/digit-recognizer" className={styles.card}>
-    <h3>Try Digit Recognizer &rarr;</h3>
-   </Link>
+   <div className={styles.card}>
+    <Link href="/models/digit-recognizer">
+     <h3>Try Digit Recognizer &rarr;</h3>
+    </Link>
+   </div>
    <p>Find in-depth information about Next.js features and API.</p>
   </div>
  );

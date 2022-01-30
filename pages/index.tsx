@@ -20,10 +20,12 @@ const Home: NextPage = () => {
      </Link>
     </h1>
     <div className={styles.grid}>
-     <Link href="/models/model-list" className={styles.card}>
-      <h3>Try Models &rarr;</h3>
-     </Link>
-     <p>Find in-depth information about Next.js features and API.</p>
+     <div className={styles.card}>
+      <Link href="/models/model-list">
+       <h3>Try Models &rarr;</h3>
+      </Link>
+      <p>Find in-depth information about Next.js features and API.</p>
+     </div>
     </div>
    </main>
    <footer>
