@@ -3,7 +3,7 @@ const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
- basePath: process.env.GITHUB_ACTIONS ? '/akiralab.github.io/' : '',
+ basePath: process.env.GITHUB_ACTIONS ? '/akiralab.github.io/pages/' : '',
  trailingSlash: true,
  reactStrictMode: true,
  //distDir: 'build',
