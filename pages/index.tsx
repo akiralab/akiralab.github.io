@@ -21,7 +21,7 @@ const Home: NextPage = () => {
     </h1>
     <div className={styles.grid}>
      <div className={styles.card}>
-      <Link href="/models/model-list">
+      <Link href="/models">
        <h3>Try Models &rarr;</h3>
       </Link>
       <p>Find in-depth information about Next.js features and API.</p>
