@@ -15,7 +15,6 @@ const Home: NextPage = () => {
 
     <main>
      <h1 className="title">
-      Read{' '}
       <Link href="/posts/first-post">
        <a>My First Page!</a>
       </Link>
