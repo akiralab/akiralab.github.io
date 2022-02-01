@@ -5,8 +5,8 @@ import styles from '../../styles/Home.module.css';
 export default function Models() {
  return (
   <>
-   <div className={styles.grid}>
-    <div className={styles.card}>
+   <div className="grid">
+    <div className="card">
      <Link href="/models/digit-recognizer">
       <h3>Try Digit Recognizer &rarr;</h3>
      </Link>

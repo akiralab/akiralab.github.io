@@ -7,21 +7,21 @@ import styles from '../styles/Home.module.css';
 const Home: NextPage = () => {
  return (
   <>
-   <div className={styles.container}>
+   <div className="container">
     <Head>
      <title>Welcome to this page!</title>
      <link rel="icon" href="/favicon.ico" />
     </Head>
 
     <main>
-     <h1 className={styles.title}>
+     <h1 className="title">
       Read{' '}
       <Link href="/posts/first-post">
        <a>My First Page!</a>
       </Link>
      </h1>
-     <div className={styles.grid}>
-      <div className={styles.card}>
+     <div className="grid">
+      <div className="card">
        <Link href="/models">
         <h3>Try Models &rarr;</h3>
        </Link>
@@ -30,7 +30,7 @@ const Home: NextPage = () => {
      </div>
     </main>
     <footer>
-     Powered by <img src="/vercel.svg" alt="Vercel" className={styles.logo} />
+     Powered by <img src="/vercel.svg" alt="Vercel" className="logo" />
     </footer>
    </div>
   </>
