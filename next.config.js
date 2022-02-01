@@ -27,6 +27,10 @@ module.exports = {
       from: './model/',
       to: 'static/chunks/pages',
      },
+     {
+      from: './styles/',
+      to: 'static/chunks/pages',
+     },
     ],
    })
   );
