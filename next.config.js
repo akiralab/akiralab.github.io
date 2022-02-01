@@ -6,7 +6,7 @@ module.exports = {
  basePath: process.env.GITHUB_ACTIONS ? '/akiralab.github.io' : '',
  trailingSlash: true,
  reactStrictMode: true,
- //distDir: 'build',
+ distDir: 'build',
  webpack: (config, {}) => {
   config.resolve.extensions.push('.ts', '.tsx');
   config.resolve.fallback = { fs: false };
