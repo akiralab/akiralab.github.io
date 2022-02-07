@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  basePath: process.env.GITHUB_ACTIONS ? 'https://akiralab.github.io/' : '',
+  basePath: process.env.GITHUB_ACTIONS ? '/akiralab.github.io/akiralab.github.io' : '',
   trailingSlash: true,
   images: {
     loader: 'imgix',
