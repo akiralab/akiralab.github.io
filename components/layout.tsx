@@ -4,11 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './layout.module.css';
 import noteimage from '../public/note.png';
+import { ReactNode } from 'react';
 
-// import Navbar from './navbar';
-// import Footer from './footer';
+interface Props {
+ children: ReactNode;
+}
 
-export default function Layout({ children }) {
+const Layout = ({ children }: Props) => {
  return (
   <>
    <Head>
@@ -50,4 +52,6 @@ export default function Layout({ children }) {
    </div>
   </>
  );
-}
+};
+
+export default Layout;
