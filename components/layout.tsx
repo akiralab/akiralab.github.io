@@ -23,15 +23,18 @@ const Layout = ({ children }: Props) => {
      <div className={styles.header}>
       <div className={styles.sitetitle}>akiralab</div>
       <div className={styles.sns}>
-       <a className={styles.logo}>
-        <img src="/kaggle-icon.svg" alt="twitter" width="30" height="30" />
-       </a>
-       <a className={styles.logo}>
+       <Link className={styles.logo} href="https://github.com/akiralab">
         <img src="/github.svg" alt="github" width="40" height="40" />
-       </a>
-       <a className={styles.logo}>
+       </Link>
+       <Link className={styles.logo} href="https://twitter.com/Le0_Rosso">
         <img src="/twitter.svg" alt="twitter" width="40" height="40" />
-       </a>
+       </Link>
+       {/* <Link className={styles.logo} href="https://www.kaggle.com/akirakawai">
+        <img src="/kaggle.svg" alt="kaggle" width="40" height="40" />
+       </Link> */}
+       <Link className={styles.logo} href="https://note.com/kawaiakira">
+        <img src="/note.svg" alt="note" width="40" height="40" />
+       </Link>
       </div>
      </div>
     </div>

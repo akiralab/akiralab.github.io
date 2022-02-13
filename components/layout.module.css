@@ -42,23 +42,23 @@
 
 .sns {
  margin-left: auto;
- padding: 0 0.5em;
+ /* margin: auto 0em auto auto; */
+ padding: 0 1em;
  justify-items: right;
+ transition: color 0.15s ease, border-color 0.15s ease;
 }
 
 .logo {
  height: 1em;
  float: right;
  margin-left: 0.5rem;
- align-items: right;
+ padding: 0 1rem;
+ align-items: center;
 }
+
 .sitetitle {
  font-weight: 10;
  font-size: 2em;
-}
-
-.snsicon {
- padding: 0 0.5rem;
 }
 
 .footer {

@@ -8,22 +8,10 @@ const Home: NextPage = () => {
  return (
   <Layout>
    <div className={styles.grid}>
-    <Link href="https://nextjs.org/docs">
+    <Link href="/about">
      <div className={styles.card}>
-      <h2>Documentation &rarr;</h2>
-      <p>Find in-depth information about Next.js features and API.</p>
-     </div>
-    </Link>
-    <Link href="https://nextjs.org/learn">
-     <div className={styles.card}>
-      <h2>Learn &rarr;</h2>
-      Learn about Next.js in an interactive course with quizzes!
-     </div>
-    </Link>
-    <Link href="https://github.com/vercel/next.js/tree/canary/examples">
-     <div className={styles.card}>
-      <h2>Examples &rarr;</h2>
-      <p>Discover and deploy boilerplate example Next.js projects.</p>
+      <h2>Preparing...</h2>
+      <p>コンテンツ準備中</p>
      </div>
     </Link>
    </div>
