@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     </Link>
     <Link href="/notion">
      <div className={styles.card}>
-      <h2>Notion->Next.js</h2>
+      <h2>Notion with Next.js</h2>
       <p>コンテンツ準備中</p>
      </div>
     </Link>
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       <p>コンテンツ準備中</p>
      </div>
     </Link>
-    <Link href="/blogs">
+    <Link href="/zenn">
      <div className={styles.card}>
       <h2>Zenn articles</h2>
       <p>コンテンツ準備中</p>
