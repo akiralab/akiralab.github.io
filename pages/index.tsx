@@ -8,9 +8,27 @@ const Home: NextPage = () => {
  return (
   <Layout>
    <div className={styles.grid}>
-    <Link href="/about">
+    <Link href="/digit-recognizer">
      <div className={styles.card}>
-      <h2>Preparing...</h2>
+      <h2>Digit Recognizer</h2>
+      <p>コンテンツ準備中</p>
+     </div>
+    </Link>
+    <Link href="/notion">
+     <div className={styles.card}>
+      <h2>Notion->Next.js</h2>
+      <p>コンテンツ準備中</p>
+     </div>
+    </Link>
+    <Link href="/blogs">
+     <div className={styles.card}>
+      <h2>ML blogs</h2>
+      <p>コンテンツ準備中</p>
+     </div>
+    </Link>
+    <Link href="/blogs">
+     <div className={styles.card}>
+      <h2>Zenn articles</h2>
       <p>コンテンツ準備中</p>
      </div>
     </Link>
