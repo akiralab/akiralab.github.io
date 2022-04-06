@@ -15,19 +15,19 @@ const ImageCanvas = (props: Props) => {
  const [topResultConfidence, setConfidence] = useState('');
  const [inferenceTime, setInferenceTime] = useState('');
 
- // Load the image from the IMAGE_URLS array
- const getImage = () => {
-  var sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
-  var random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
-  return sampleImageUrls[random];
- };
+ //  // Load the image from the IMAGE_URLS array
+ //  const getImage = () => {
+ //   var sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
+ //   var random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
+ //   return sampleImageUrls[random];
+ //  };
 
  // Draw image and other  UI elements then run inference
  const displayImageAndRunInference = () => {
   // Get the image
   image = new Image();
-  var sampleImage = getImage();
-  image.src = sampleImage.value;
+  //   var sampleImage = getImage();
+  //   image.src = sampleImage.value;
 
   // Clear out previous values.
   setLabel(`推論中...`);
@@ -61,7 +61,7 @@ const ImageCanvas = (props: Props) => {
  return (
   <>
    <button className={styles.grid} onClick={displayImageAndRunInference}>
-    推論する
+    Run Squeezenet inference
    </button>
    <br />
    <canvas ref={canvasRef} width={props.width} height={props.height} />
