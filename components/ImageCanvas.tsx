@@ -55,13 +55,13 @@ const ImageCanvas = (props: Props) => {
   // Update the label and confidence
   setLabel(topResult.name.toUpperCase());
   setConfidence(topResult.probability);
-  setInferenceTime(`Inference speed: ${inferenceTime} seconds`);
+  setInferenceTime(`今回の推論時間: ${inferenceTime} 秒`);
  };
 
  return (
   <>
    <button className={styles.grid} onClick={displayImageAndRunInference}>
-    Run Squeezenet inference
+    推論する
    </button>
    <br />
    <canvas ref={canvasRef} width={props.width} height={props.height} />
