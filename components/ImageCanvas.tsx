@@ -47,15 +47,18 @@ const ImageCanvas = (props: Props) => {
 
  const submitInference = async () => {
   // Get the image data from the canvas and submit inference.
+  console.log('[submitInference] getting result...');
   var [inferenceResult, inferenceTime] = await inferenceSqueezenet(image.src);
 
+  console.log('[submitInference] got result...');
   // Get the highest confidence.
   var topResult = inferenceResult[0];
 
   // Update the label and confidence
+  console.log('[submitInference] showing result...');
   setLabel(topResult.name.toUpperCase());
   setConfidence(topResult.probability);
-  setInferenceTime(`Inference speed: ${inferenceTime} seconds`);
+  setInferenceTime(`今回の推論時間: ${inferenceTime} 秒`);
  };
 
  return (
