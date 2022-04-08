@@ -2,8 +2,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import styles from './layout.module.css';
-import noteimage from '../public/note.png';
+import styles from '../styles/layout.module.css';
 import { ReactNode } from 'react';
 
 interface Props {
@@ -36,8 +35,10 @@ const Layout = ({ children }: Props) => {
          <img src="/twitter.svg" alt="twitter" width="40" height="40" />
         </div>
        </Link>
-       <Link className={styles.logo} href="https://www.kaggle.com/akirakawai">
-        <img src="/kaggle.svg" alt="kaggle" width="40" height="40" />
+       <Link href="https://www.kaggle.com/akirakawai">
+        <div className={styles.logo}>
+         <img src="/kaggle.svg" alt="kaggle" width="40" height="40" />
+        </div>
        </Link>
        <Link href="https://note.com/kawaiakira">
         <div className={styles.logo}>
