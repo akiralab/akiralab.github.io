@@ -4,11 +4,12 @@ import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 import Layout from '../components/layout';
+
 const Home: NextPage = () => {
  return (
   <Layout>
    <div className={styles.grid}>
-    <Link href="/squeezenet">
+    <Link href="/image-classifier">
      <div className={styles.card}>
       <h2>動物推測</h2>
       <p>コンテンツ公開中</p>

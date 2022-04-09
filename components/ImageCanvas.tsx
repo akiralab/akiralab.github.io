@@ -1,7 +1,9 @@
 import { useRef, useState } from 'react';
 import { IMAGE_URLS } from '../data/sample-image-urls';
 import { inferenceSqueezenet } from '../utils/predict';
-import styles from '../styles/Home.module.css';
+import { Label } from 'semantic-ui-react';
+import React from 'react';
+import { Grid, Segment, Divider } from 'semantic-ui-react';
 
 interface Props {
  height: number;
@@ -14,25 +16,30 @@ const ImageCanvas = (props: Props) => {
  const [topResultLabel, setLabel] = useState('');
  const [topResultConfidence, setConfidence] = useState('');
  const [inferenceTime, setInferenceTime] = useState('');
+ const [imageURL, setImageURL] = useState('');
+ const [segmentState, setsegmentState] = useState('');
 
  // Load the image from the IMAGE_URLS array
  const getImage = () => {
   var sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
   var random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
+
+  setImageURL(sampleImageUrls[random]);
   return sampleImageUrls[random];
  };
 
  // Draw image and other  UI elements then run inference
- const displayImageAndRunInference = () => {
+ const RunInference = () => {
   // Get the image
   image = new Image();
-  var sampleImage = getImage();
+  var sampleImage = imageURL;
   image.src = sampleImage.value;
 
   // Clear out previous values.
   setLabel(`推論中...`);
   setConfidence('');
   setInferenceTime('');
+  setsegmentState('loading');
 
   // Draw the image on the canvas
   const canvas = canvasRef.current;
@@ -43,6 +50,25 @@ const ImageCanvas = (props: Props) => {
 
   // Run the inference
   submitInference();
+ };
+
+ // Draw image and other  UI elements then run inference
+ const displayDummyImage = () => {
+  // Get the image
+  image = new Image();
+  var sampleImage = getImage();
+  image.src = sampleImage.value;
+
+  // Draw the image on the canvas
+  const canvas = canvasRef.current;
+  const ctx = canvas!.getContext('2d');
+  image.onload = () => {
+   ctx!.drawImage(image, 0, 0, props.width, props.height);
+  };
+  setLabel('');
+  setConfidence('');
+  setInferenceTime(``);
+  setsegmentState('disabled');
  };
 
  const submitInference = async () => {
@@ -57,21 +83,44 @@ const ImageCanvas = (props: Props) => {
   // Update the label and confidence
   console.log('[submitInference] showing result...');
   setLabel(topResult.name.toUpperCase());
-  setConfidence(topResult.probability);
-  setInferenceTime(`今回の推論時間: ${inferenceTime} 秒`);
+  setConfidence(`${topResult.probability.toFixed(3)}`);
+  setInferenceTime(`${inferenceTime} 秒`);
+  setsegmentState('');
  };
 
  return (
   <>
-   <button className={styles.grid} onClick={displayImageAndRunInference}>
-    推論する
-   </button>
-   <br />
-   <canvas ref={canvasRef} width={props.width} height={props.height} />
-   <span>
-    {topResultLabel} {topResultConfidence}
-   </span>
-   <span>{inferenceTime}</span>
+   <Grid columns={3} divided>
+    <Grid.Row stretched>
+     <Grid.Column>
+      <canvas ref={canvasRef} width={props.width} height={props.height} />
+      {/* <Segment>1</Segment> */}
+     </Grid.Column>
+     <Grid.Column>
+      <Segment>
+       <button className="ui positive button" onClick={displayDummyImage}>
+        画像を表示
+       </button>
+      </Segment>
+      <Segment>
+       <button className="ui positive button" onClick={RunInference}>
+        推論する
+       </button>
+      </Segment>
+     </Grid.Column>
+     <Grid.Column>
+      <Segment className={segmentState}>
+       <p>推論結果: {topResultLabel}</p>
+      </Segment>
+      <Segment className={segmentState}>
+       <p>自信: {topResultConfidence}</p>
+      </Segment>
+      <Segment className={segmentState}>
+       <p>推論時間: {inferenceTime}</p>
+      </Segment>
+     </Grid.Column>
+    </Grid.Row>
+   </Grid>
   </>
  );
 };
