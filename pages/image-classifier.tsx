@@ -1,16 +1,8 @@
 import type { NextPage } from 'next';
 import Layout from '../components/layout';
 import ImageCanvas from '../components/ImageCanvas';
-import {
- Container,
- Divider,
- Dropdown,
- Grid,
- Header,
- List,
- Menu,
- Segment,
-} from 'semantic-ui-react';
+import { Container, Header } from 'semantic-ui-react';
+
 const Home: NextPage = () => {
  return (
   <Layout>
