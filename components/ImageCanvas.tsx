@@ -21,13 +21,8 @@ const ImageCanvas = (props: Props) => {
 
  // Load the image from the IMAGE_URLS array
  const getImage = () => {
-  var sampleImageUrls: Array<{ text; value }> = IMAGE_URLS;
+  var sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
   var random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
-
-  setImageURL(sampleImageUrls[random]);
-  console.log('sampleImageUrls[random]', sampleImageUrls[random]);
-  console.log(sampleImageUrls);
-
   return sampleImageUrls[random];
  };
 
@@ -36,7 +31,7 @@ const ImageCanvas = (props: Props) => {
   // Get the image
   image = new Image();
   var sampleImage = imageURL;
-  image.src = sampleImage.value;
+  image.src = sampleImage;
 
   // Clear out previous values.
   setLabel(`推論中...`);
@@ -62,7 +57,9 @@ const ImageCanvas = (props: Props) => {
   var sampleImage = getImage();
   image.src = sampleImage.value;
 
-  // Draw the image on the canvas
+  setImageURL(sampleImage.value);
+  console.log(sampleImage.value);
+
   const canvas = canvasRef.current;
   const ctx = canvas!.getContext('2d');
   image.onload = () => {
@@ -97,7 +94,6 @@ const ImageCanvas = (props: Props) => {
     <Grid.Row stretched>
      <Grid.Column>
       <canvas ref={canvasRef} width={props.width} height={props.height} />
-      {/* <Segment>1</Segment> */}
      </Grid.Column>
      <Grid.Column>
       <Segment>
