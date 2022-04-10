@@ -8,7 +8,7 @@ const Home: NextPage = () => {
  return (
   <Layout>
    <div>数字認識</div>
-   <DigitCanvas width={240} height={240} />
+   <DigitCanvas />
   </Layout>
  );
 };
