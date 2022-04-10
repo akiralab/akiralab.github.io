@@ -21,10 +21,13 @@ const ImageCanvas = (props: Props) => {
 
  // Load the image from the IMAGE_URLS array
  const getImage = () => {
-  var sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
+  var sampleImageUrls: Array<{ text; value }> = IMAGE_URLS;
   var random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
 
   setImageURL(sampleImageUrls[random]);
+  console.log('sampleImageUrls[random]', sampleImageUrls[random]);
+  console.log(sampleImageUrls);
+
   return sampleImageUrls[random];
  };
 
