@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 import Layout from '../components/layout';
 import CustomButton from './playground/CustomButton';
-import CustomForm from './playground/CustomForm';
+import CustomTimer from './playground/CustomTimer';
+import CustomCanvas from './playground/CustomCanvas';
 
 const Home: NextPage = () => {
  return (
@@ -15,8 +16,15 @@ const Home: NextPage = () => {
    </div>
    <CustomButton />
    <h3 className="ui header">2. useEffect</h3>
-   <div className="ui message">ReactのuseEffectを使って</div>
-   <CustomForm />
+   <div className="ui message">
+    ReactのuseEffectを使ってタイマーの開始/停止/リセット制御するコンポーネントを作成する
+   </div>
+   <CustomTimer />
+   <h3 className="ui header">3. useRef</h3>
+   <div className="ui message">
+    ReactのuseRefを使って手書き情報を受け取るコンポーネントを作成する
+   </div>
+   <CustomCanvas />{' '}
   </Layout>
  );
 };
