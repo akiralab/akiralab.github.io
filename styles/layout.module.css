@@ -5,6 +5,7 @@
 
 .header {
  padding: 0 2rem;
+ margin-bottom: 2rem;
  display: flex;
  flex: 1;
  padding: 1rem 0;
@@ -46,6 +47,7 @@
 .footer {
  display: flex;
  flex: 1;
+ margin-top: 2rem;
  padding: 1rem 0;
  border-top: 1px solid #eaeaea;
  justify-content: center;
