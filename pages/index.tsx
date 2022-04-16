@@ -15,6 +15,12 @@ const Home: NextPage = () => {
       <p>コンテンツ公開中</p>
      </div>
     </Link>
+    <Link href="/playground">
+     <div className={styles.card}>
+      <h2>React Playground</h2>
+      <p>コンテンツ公開中</p>
+     </div>
+    </Link>
     <Link href="/digit-recognizer">
      <div className={styles.card}>
       <h2>Digit Recognizer</h2>
