@@ -24,7 +24,13 @@ const Home: NextPage = () => {
    <div className="ui message">
     ReactのuseRefを使って手書き情報を受け取るコンポーネントを作成する
    </div>
-   <CustomCanvas />{' '}
+   <CustomCanvas
+    width={300}
+    height={300}
+    lineWidth={10}
+    lineColor={'rgb(100, 100, 100)'}
+    lineCap={'round'}
+   />
   </Layout>
  );
 };
