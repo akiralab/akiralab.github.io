@@ -26,6 +26,12 @@ const Home: NextPage = () => {
             <p>コンテンツ準備中</p>
           </div>
         </Link>
+        <Link href="/simple-poker" passHref>
+          <div className={styles.card}>
+            <h2>原始ポーカー</h2>
+            <p>コンテンツ準備中</p>
+          </div>
+        </Link>{" "}
         <Link href="/notion" passHref>
           <div className={styles.card}>
             <h2>Notion with Next.js</h2>
