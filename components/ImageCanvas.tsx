@@ -1,129 +1,100 @@
 import { useRef, useState } from "react";
 import { IMAGE_URLS } from "../data/sample-image-urls";
 import { inferenceSqueezenet } from "../utils/predict";
-import { Label } from "semantic-ui-react";
-import React from "react";
-import { Grid, Segment, Divider } from "semantic-ui-react";
+import { Label, Grid, Segment, Divider } from "semantic-ui-react";
 
 interface Props {
   height: number;
   width: number;
 }
 
-const ImageCanvas = (props: Props) => {
+const ImageCanvas: React.FC<Props> = ({ height, width }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  var image: HTMLImageElement;
-  const [topResultLabel, setLabel] = useState("");
-  const [topResultConfidence, setConfidence] = useState("");
+  const [topResultLabel, setTopResultLabel] = useState("");
+  const [topResultConfidence, setTopResultConfidence] = useState("");
   const [inferenceTime, setInferenceTime] = useState("");
   const [imageURL, setImageURL] = useState("");
-  const [segmentState, setsegmentState] = useState("");
+  const [segmentState, setSegmentState] = useState("");
 
-  // Load the image from the IMAGE_URLS array
   const getImage = () => {
-    var sampleImageUrls: Array<{ text: string; value: string }> = IMAGE_URLS;
-    var random = Math.floor(Math.random() * (9 - 0 + 1) + 0);
-    return sampleImageUrls[random];
+    const sampleImageUrls = IMAGE_URLS;
+    const randomIndex = Math.floor(Math.random() * sampleImageUrls.length);
+    return sampleImageUrls[randomIndex];
   };
 
-  // Draw image and other  UI elements then run inference
-  const RunInference = () => {
-    // Get the image
-    image = new Image();
-    var sampleImage = imageURL;
-    image.src = sampleImage;
-
-    // Clear out previous values.
-    setLabel(`推論中...`);
-    setConfidence("");
-    setInferenceTime("");
-    setsegmentState("loading");
-
-    // Draw the image on the canvas
+  const displayImageOnCanvas = (image: HTMLImageElement) => {
     const canvas = canvasRef.current;
     const ctx = canvas!.getContext("2d");
     image.onload = () => {
-      ctx!.drawImage(image, 0, 0, props.width, props.height);
+      ctx!.clearRect(0, 0, width, height); // 既存のキャンバス内容をクリア
+      ctx!.drawImage(image, 0, 0, width, height);
     };
-
-    // Run the inference
-    submitInference();
   };
 
-  // Draw image and other  UI elements then run inference
+  const RunInference = async () => {
+    const image = new Image();
+    image.src = imageURL;
+    displayImageOnCanvas(image);
+
+    setTopResultLabel("推論中...");
+    setTopResultConfidence("");
+    setInferenceTime("");
+    setSegmentState("loading");
+
+    const [inferenceResult, timeTaken] = await inferenceSqueezenet(image.src);
+    const topResult = inferenceResult[0];
+
+    setTopResultLabel(topResult.name.toUpperCase());
+    setTopResultConfidence(`${topResult.probability.toFixed(3)}`);
+    setInferenceTime(`${timeTaken} 秒`);
+    setSegmentState("");
+  };
+
   const displayDummyImage = () => {
-    // Get the image
-    image = new Image();
-    var sampleImage = getImage();
+    const sampleImage = getImage();
+    const image = new Image();
     image.src = sampleImage.value;
 
     setImageURL(sampleImage.value);
-    console.log(sampleImage.value);
+    displayImageOnCanvas(image);
 
-    const canvas = canvasRef.current;
-    const ctx = canvas!.getContext("2d");
-    image.onload = () => {
-      ctx!.drawImage(image, 0, 0, props.width, props.height);
-    };
-    setLabel("");
-    setConfidence("");
-    setInferenceTime(``);
-    setsegmentState("disabled");
-  };
-
-  const submitInference = async () => {
-    // Get the image data from the canvas and submit inference.
-    console.log("[submitInference] getting result...");
-    var [inferenceResult, inferenceTime] = await inferenceSqueezenet(image.src);
-
-    console.log("[submitInference] got result...");
-    // Get the highest confidence.
-    var topResult = inferenceResult[0];
-
-    // Update the label and confidence
-    console.log("[submitInference] showing result...");
-    setLabel(topResult.name.toUpperCase());
-    setConfidence(`${topResult.probability.toFixed(3)}`);
-    setInferenceTime(`${inferenceTime} 秒`);
-    setsegmentState("");
+    setTopResultLabel("");
+    setTopResultConfidence("");
+    setInferenceTime("");
+    setSegmentState("disabled");
   };
 
   return (
-    <>
-      <Grid columns={3} divided>
-        <Grid.Row stretched>
-          <Grid.Column>
-            <canvas ref={canvasRef} width={props.width} height={props.height} />
-          </Grid.Column>
-          <Grid.Column>
-            <Segment>
-              <button
-                className="ui positive button"
-                onClick={displayDummyImage}
-              >
-                画像を表示
-              </button>
-            </Segment>
-            <Segment>
-              <button className="ui positive button" onClick={RunInference}>
-                推論する
-              </button>
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment className={segmentState}>
-              <p>推論結果: {topResultLabel}</p>
-            </Segment>
-            <Segment className={segmentState}>
-              <p>自信: {topResultConfidence}</p>
-            </Segment>
-            <Segment className={segmentState}>
-              <p>推論時間: {inferenceTime}</p>
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </>
+    <Grid columns={3} divided>
+      <Grid.Row stretched>
+        <Grid.Column>
+          <canvas ref={canvasRef} width={width} height={height} />
+        </Grid.Column>
+        <Grid.Column>
+          <Segment>
+            <button className="ui positive button" onClick={displayDummyImage}>
+              画像を表示
+            </button>
+          </Segment>
+          <Segment>
+            <button className="ui positive button" onClick={RunInference}>
+              推論する
+            </button>
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Segment className={segmentState}>
+            <p>推論結果: {topResultLabel}</p>
+          </Segment>
+          <Segment className={segmentState}>
+            <p>自信: {topResultConfidence}</p>
+          </Segment>
+          <Segment className={segmentState}>
+            <p>推論時間: {inferenceTime}</p>
+          </Segment>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   );
 };
 

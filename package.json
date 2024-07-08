@@ -10,20 +10,24 @@
  },
  "dependencies": {
   "@svgr/webpack": "^6.2.1",
+  "@tensorflow-models/mobilenet": "^2.1.1",
+  "@tensorflow/tfjs": "^4.20.0",
+  "@tensorflow/tfjs-node": "^4.20.0",
   "copy-webpack-plugin": "^10.2.4",
   "eslint-plugin-react-hooks": "^4.5.0-next-2bf5eba72-20220416",
   "fs": "^0.0.1-security",
-  "jimp": "^0.16.1",
+  "jimp": "^0.22.12",
   "lodash": "^4.17.21",
   "ndarray": "^1.0.19",
   "ndarray-ops": "^1.2.2",
-  "next": "12.0.10",
+  "next": "^12.3.4",
   "onnxjs": "^0.1.8",
   "onnxruntime-node": "^1.11.0",
   "onnxruntime-web": "^1.11.0",
   "react": "17.0.2",
   "react-dom": "17.0.2",
-  "semantic-ui-react": "^2.1.2"
+  "semantic-ui-css": "^2.5.0",
+  "semantic-ui-react": "^2.1.5"
  },
  "devDependencies": {
   "@types/lodash": "^4.14.176",
