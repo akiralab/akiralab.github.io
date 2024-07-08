@@ -1,95 +1,54 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef, useState } from "react";
+import { inferenceMNIST } from "../utils/predict";
 
-const canvasStyle = {
-  border: "1px solid gray",
-  backgroundColor: "white",
-};
-
-export type DigitCanvasAttribute = {
+interface Props {
   width: number;
   height: number;
   lineWidth: number;
   lineColor: string;
-  lineCap: CanvasLineCap;
-  clear?: boolean;
-  onMouseDown?: (e: React.MouseEvent<HTMLInputElement>) => void;
-  onUpdateCanvas?: (e: HTMLCanvasElement) => void;
-};
+  lineCap: string;
+  onInference: (inferenceResult: any, inferenceTime: string) => void;
+}
 
-const DigitCanvas: React.FC<DigitCanvasAttribute> = (props) => {
-  const canvasRef = useRef({} as HTMLCanvasElement);
-  const [drawing, setDrawing] = useState(false);
-  const [clear, setClear] = useState(false);
+const DigitCanvas: React.FC<Props> = ({ width, height, lineWidth, lineColor, lineCap, onInference }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isDrawing, setIsDrawing] = useState(false);
 
-  // 領域クリア用。親コンポーネントでclearの値を変更するとcanvasをクリアする(toggle時常にクリア)
-  useEffect(() => {
-    const ctx = canvasRef.current.getContext("2d");
-    if (ctx) {
-      ctx.clearRect(0, 0, props.width, props.height);
-      if (props.onUpdateCanvas) props.onUpdateCanvas(canvasRef.current);
-    }
-  }, [clear]);
-
-  // 描画に必要なcontextを取得し、線の色、幅をセットする
-  const getContext = () => {
-    const ctx = canvasRef.current.getContext("2d");
-    if (ctx === null) return;
-    ctx.lineWidth = props.lineWidth;
-    ctx.lineCap = props.lineCap;
-    ctx.strokeStyle = props.lineColor;
-    return ctx;
+  const startDrawing = (event: React.MouseEvent) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas!.getContext("2d");
+    ctx!.beginPath();
+    ctx!.moveTo(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+    setIsDrawing(true);
   };
 
-  // 線描画開始処理。beginPath()で新しいパスを開始する(開始しないと色や太さが変更できない)
-  const mouseDown: React.MouseEventHandler = (e) => {
-    const { offsetX: x, offsetY: y } = e.nativeEvent;
-    setDrawing(true);
-    const ctx = getContext();
-    if (ctx === undefined) return;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
+  const draw = (event: React.MouseEvent) => {
+    if (!isDrawing) return;
+    const canvas = canvasRef.current;
+    const ctx = canvas!.getContext("2d");
+    ctx!.lineTo(event.nativeEvent.offsetX, event.nativeEvent.offsetY);
+    ctx!.strokeStyle = lineColor;
+    ctx!.lineWidth = lineWidth;
+    ctx!.lineCap = lineCap;
+    ctx!.stroke();
   };
 
-  const clearCanvas = () => {
-    setClear(!clear);
+  const stopDrawing = () => {
+    setIsDrawing(false);
   };
 
-  // マウスの動きに合わせて線を描画する
-  const mouseMove: React.MouseEventHandler = (e) => {
-    if (!drawing) return;
+  const runInference = async () => {
+    const canvas = canvasRef.current;
+    const imageSrc = canvas!.toDataURL();
 
-    const { offsetX: x, offsetY: y } = e.nativeEvent;
-    const ctx = getContext();
-    if (ctx === undefined) return;
-    ctx.lineTo(x, y);
-    ctx.stroke();
+    const [inferenceResult, timeTaken] = await inferenceMNIST(imageSrc);
+    onInference(inferenceResult, timeTaken);
   };
 
-  // 線描画完了(canvas更新イベントコールバックを行う)
-  const endDrawing = () => {
-    setDrawing(false);
-    if (props.onUpdateCanvas) props.onUpdateCanvas(canvasRef.current);
-  };
-
-  // canvas
   return (
     <>
-      <div>
-        <canvas
-          ref={canvasRef}
-          width={props.width}
-          height={props.height}
-          onMouseDown={mouseDown}
-          onMouseMove={mouseMove}
-          onMouseUp={endDrawing}
-          onMouseLeave={endDrawing}
-          style={canvasStyle}
-        />
-      </div>
-      <button onClick={clearCanvas} className="ui button basic">
-        <i className="redo icon"></i>
-        Reset
-      </button>
+      <canvas ref={canvasRef} width={width} height={height} onMouseDown={startDrawing} onMouseMove={draw} onMouseUp={stopDrawing} onMouseLeave={stopDrawing} style={{ border: "1px solid #000" }} />
+      <button onClick={runInference}>推論する</button>
     </>
   );
 };
